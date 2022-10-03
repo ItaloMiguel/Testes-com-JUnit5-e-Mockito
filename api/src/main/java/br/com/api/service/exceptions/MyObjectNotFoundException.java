@@ -7,10 +7,5 @@ public class MyObjectNotFoundException extends RuntimeException {
 	public MyObjectNotFoundException(String message) {
         super(message);
     }
-
-	public MyObjectNotFoundException(String message, Throwable cause) {
-		super(message, cause);
-	}
-	
 	
 }
