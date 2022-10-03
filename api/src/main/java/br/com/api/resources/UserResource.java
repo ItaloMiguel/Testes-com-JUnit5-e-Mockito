@@ -1,7 +1,9 @@
 package br.com.api.resources;
 
-import br.com.api.domain.Users;
+import br.com.api.domain.User;
+import br.com.api.domain.dto.UserDto;
 import br.com.api.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserResource {
 
     @Autowired
+    private ModelMapper mapper;
+    @Autowired
     private UserService userService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Users> findById(@PathVariable Integer id) {
+    public ResponseEntity<UserDto> findById(@PathVariable Integer id) {
 //        Users obj = userService.findById(id);
-        return ResponseEntity.ok().body(userService.findById(id));
+        return ResponseEntity.ok().body(mapper.map(userService.findById(id), UserDto.class));
     }
 }
