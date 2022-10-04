@@ -128,6 +128,19 @@ class UserServiceImplTest {
     }
 
     @Test
+    void whenUpdateThenReturnAMyDataIntegratyViolationException() {
+        when(repository.findByEmail(anyString())).thenReturn(optionalUser);
+
+        try {
+            optionalUser.get().setId(2);
+            service.create(userDto);
+        } catch (Exception ex) {
+            assertEquals(MyDataIntegratyViolationException.class, ex.getClass());
+        }
+
+    }
+
+    @Test
     void delete() {
     }
 
