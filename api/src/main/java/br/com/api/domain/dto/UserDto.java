@@ -19,5 +19,4 @@ public class UserDto {
     private String email;
     @JsonIgnore
     private String password;
-
 }
