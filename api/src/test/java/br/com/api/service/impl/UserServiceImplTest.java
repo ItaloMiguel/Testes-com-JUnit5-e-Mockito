@@ -8,10 +8,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.mockito.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -19,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -92,7 +90,18 @@ class UserServiceImplTest {
     }
 
     @Test
-    void create() {
+    void whenCreateThenReturnSuccess() {
+        when(repository.save(any())).thenReturn(user);
+
+        User reponse = service.create(userDto);
+        assertNotNull(reponse);
+        assertEquals(User.class, reponse.getClass());
+        assertEquals(ID, reponse.getId());
+        assertEquals(NAME, reponse.getName());
+        assertEquals(EMAIL, reponse.getEmail());
+        assertEquals(PASSWORD, reponse.getPassword());
+
+
     }
 
     @Test
