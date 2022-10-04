@@ -25,6 +25,7 @@ class UserServiceImplTest {
     public static final String NAME = "Italo";
     public static final String EMAIL = "italo@gmail.com";
     public static final String PASSWORD = "123";
+    public static final int INDEX = 2;
 
     @InjectMocks
     private UserServiceImpl service;
@@ -132,7 +133,7 @@ class UserServiceImplTest {
         when(repository.findByEmail(anyString())).thenReturn(optionalUser);
 
         try {
-            optionalUser.get().setId(2);
+            optionalUser.get().setId(INDEX);
             service.create(userDto);
         } catch (Exception ex) {
             assertEquals(MyDataIntegratyViolationException.class, ex.getClass());
